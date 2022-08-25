@@ -89,7 +89,7 @@ namespace TicTacToe
                 Board();
                 var endText = gameStage == 3
                     ? "It's a draw!"
-                    : $"Congratulations, player {(currPlayer == 1 ? player1 : player2)} has won!";
+                    : $"Congratulations, player {(currPlayer == 2 ? player1 : player2)} has won!";
                 Console.WriteLine(endText);
                 Console.WriteLine("Press Any Key, to restart.");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);

@@ -7,8 +7,7 @@ namespace TicTacToe
     {
         static int gameStage =
             0; //0 = Running | 1 = Player 1 Won | 2 = Player 2 Won | 3 = Draw! |
-        static string[] plads =
-            new string[9] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        static string[] plads;
 
         private static int currPlayer = 1;
         private static int rounds = 0;
@@ -49,13 +48,17 @@ namespace TicTacToe
         {
             do
             {
+                rounds = 0;
+                plads = new string[9] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
                 Console.Clear();
                 Console.WriteLine("__________|Welcome to TicTacToe|__________");
-                Console.WriteLine("What is the name over Player 1?");
+                Console.WriteLine("\n   What is the name over Player 1?");
+                Console.SetCursorPosition(3, 3);
                 var player1 = Console.ReadLine();
-                Console.WriteLine("Thank you, what is the name of Player 2?");
+                Console.WriteLine("\n   Thank you, what is the name of Player 2?");
+                Console.SetCursorPosition(3, 6);
                 var player2 = Console.ReadLine();
-                Console.WriteLine("Thank you.\n" + player1 + " is X, and " + player2 + " is O. \nGame is ready to start, please press Any Key.");
+                Console.WriteLine("\n   Thank you.\n   " + player1 + " is X, and " + player2 + " is O. \n   Game is ready to start, please press Any Key.");
                 Console.ReadKey();
                 do
                 {
@@ -64,15 +67,15 @@ namespace TicTacToe
                     Console.WriteLine("\n");
                     Board();
 
-                    Console.WriteLine($"\n  {(currPlayer == 1 ? player1 : player2)}'s turn.");
+                    Console.WriteLine($"\n     {(currPlayer == 1 ? player1 : player2)}'s turn.");
                     var choice = Console.ReadLine();
                     bool isValid = int.TryParse(choice, out var index);
                     while (!isValid || index is > 9 or < 1 || plads[index - 1] == "X" || plads[index - 1] == "O")
                     {
                         string text;
-                        if (!isValid || index is > 9 or < 1) text = $"{choice} is not a valid input. Number 1-9 are valid inputs!";
+                        if (!isValid || index is > 9 or < 1) text = $"   {choice} is not a valid input. Number 1-9 are valid inputs!";
                         else
-                            text = $"Field {index} is already taken. Choose a new field:\n";
+                            text = $"   Field {index} is already taken. Choose a new field:\n";
                         Console.WriteLine(text);
                         choice = Console.ReadLine();
                         isValid = int.TryParse(choice, out index);
@@ -88,10 +91,10 @@ namespace TicTacToe
                 Console.WriteLine("\n");
                 Board();
                 var endText = gameStage == 3
-                    ? "It's a draw!"
-                    : $"Congratulations, player {(currPlayer == 2 ? player1 : player2)} has won!";
+                    ? "\n   It's a draw!"
+                    : $"\n   Congratulations, player {(currPlayer == 2 ? player1 : player2)} has won!";
                 Console.WriteLine(endText);
-                Console.WriteLine("Press Any Key, to restart.");
+                Console.WriteLine("   Press Any Key, to restart.");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
 
